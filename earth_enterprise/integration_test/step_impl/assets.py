@@ -234,10 +234,10 @@ def cancel_map_project(project):
 def create_and_build_blue_marble_proj(projectName):
   project = "StatePropagationTest_" + projectName
   create_imagery_proj(project)
-  create_imagery_resource_add_to_proj("BlueMarble_" + projectName, "/opt/google/share/tutorials/fusion/Imagery/bluemarble_4km.tif", project)
-  create_imagery_resource_add_to_proj("i3SF15meter_" + projectName, "/opt/google/share/tutorials/fusion/Imagery/i3SF15-meter.tif", project)
-  create_imagery_resource_add_to_proj("USGSLanSat_" + projectName, "/opt/google/share/tutorials/fusion/Imagery/usgsLanSat.tif", project)
-  create_imagery_resource_add_to_proj("SFHiRes_" + projectName, "/opt/google/share/tutorials/fusion/Imagery/usgsSFHiRes.tif", project)
+  create_imagery_resource_add_to_proj("BlueMarble_" + projectName, os.path.join(get_src_data_path(), "Imagery/bluemarble_4km.tif"), project)
+  create_imagery_resource_add_to_proj("i3SF15meter_" + projectName,  os.path.join(get_src_data_path(), "Imagery/i3SF15-meter.tif"), project)
+  create_imagery_resource_add_to_proj("USGSLanSat_" + projectName,  os.path.join(get_src_data_path(), "Imagery/usgsLanSat.tif"), project)
+  create_imagery_resource_add_to_proj("SFHiRes_" + projectName,  os.path.join(get_src_data_path(), "Imagery/usgsSFHiRes.tif"), project)
   verify_imagery_proj_no_versions(project)
   build_imagery_project(project)
 

@@ -410,6 +410,11 @@ Mark resource bad
 * Verify that the state of imagery resource "USGSLanSat_BadAndGood" is "Succeeded"
 * Verify that the state of imagery resource "SFHiRes_BadAndGood" is "Succeeded"
 
+Build database with bad Resources
+* Clean imagery resource "BlueMarble_Database"
+* Build imagery resource "BlueMarble_Database"
+* Verify that the state of database"BlueMarble_Database" is "Blocked"
+
 Mark resource good
 * Mark imagery resource "BlueMarble_BadAndGood" good
 * Verify that the state of database "Database_BadAndGood" is "Succeeded"
