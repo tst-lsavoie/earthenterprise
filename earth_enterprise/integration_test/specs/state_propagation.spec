@@ -24,7 +24,7 @@ in the asset_root and may require privileged access to run.
 Set up
 * Create asset root directories
 
-## Build, Clean, and Rebuild Project Test
+## Build, Clean and Rebuild Project Test
 
 Build
 * Create and build default project "BasicBuild"
@@ -394,7 +394,7 @@ Clean resource after build
 ## Set Bad and Good
 
 Set up and build
-* Create and build default project "BadAndGood"
+* Create and build default project "BadAndGood" 
 * Create database "Database_BadAndGood" from imagery project "StatePropagationTest_BadAndGood"
 * Build database "Database_BadAndGood"
 * Wait for database "Database_BadAndGood" to reach state "Succeeded"

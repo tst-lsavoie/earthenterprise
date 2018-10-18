@@ -5,7 +5,9 @@
 # after the tests instead.
 export ASSETROOT=/gevol/assets
 export SRC_VOLUME=/gevol/src 
+export TUTORIAL_PATH=/opt/google/share/tutorials/fusion
 export TEST_DATA_PATH=${SRC_VOLUME}/gauge_tests
+export PATH=${PATH}:/opt/google/bin
 
 sudo rm -rf ${ASSETROOT}/Databases/Database*
 sudo rm -rf ${ASSETROOT}/MapLayers/StatePropagationTest*
@@ -21,12 +23,24 @@ sudo rm -rf ${ASSETROOT}/Resources/Imagery/BadImage*
 sudo rm -rf ${ASSETROOT}/Resources/Imagery/SFHiRes*
 sudo rm -rf ${ASSETROOT}/Resources/Terrain/GTopo_Database*
 sudo rm -rf ${ASSETROOT}/Resources/Vector/CA_POIs_* 
+sudo chown -R gefusionuser:gegroup ${ASSETROOT}
 sudo /etc/init.d/gefusion restart
 
-#create assets that will fail when fusing, to synthesize bad projects. 
-#genewimageryresource -o Imagery/BadTestImage1 ${TEST_DATA_PATH}/Imagery/usgsSFHiRes.tif
-##genewimageryresource -o Imagery/BadTestImage2 ${TEST_DATA_PATH}/Imagery/usgsLanSat.jp2
-#genewimageryproject -o Projects/Imagery/BadImagery Imagery/BadTestImage1 Imagery/BadTestImage2
-#gebuild Projects/Imagery/BadImagery 
+# Script will only download if necessary
+sh ${TUTORIAL_PATH}/download_tutorial.sh
+rm -rf ${TEST_DATA_PATH}/*
+rsync -arv ${TUTORIAL_PATH}/ ${TEST_DATA_PATH}
 
 
+# create a failed imagery resource
+export FAILED_RESOURCE_NAME=Resources/Imagery/FailedImageryResource
+export FAILED_RESOURCE_ASSET_PATH=${ASSETROOT}/${FAILED_RESOURCE_NAME}.kiasset
+genewimageryresource -o Resources/Imagery/FailedImageryResource ${TEST_DATA_PATH}/Imagery/usgsSFHiRes.tif
+gebuild ${FAILED_RESOURCE_NAME}
+echo "Sleeping for 60 seconds, waiting for test resources to build: ${FAILED_RESOURCE_NAME}"
+sleep 60
+
+gequery ${FAILED_RESOURCE_NAME} --status
+# Mark ALL versions as failed
+find ${FAILED_RESOURCE_ASSET_PATH} -name "khassetver.xml" -exec sed -i.bak "s/<state>Succeeded/<^Cate>Failed/g" {} \;
+gequery ${FAILED_RESOURCE_NAME} --status
