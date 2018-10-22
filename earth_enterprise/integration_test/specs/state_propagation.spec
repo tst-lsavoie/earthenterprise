@@ -418,11 +418,6 @@ Mark resource bad
 * Verify that the state of imagery resource "USGSLanSat_BadAndGood" is "Succeeded"
 * Verify that the state of imagery resource "SFHiRes_BadAndGood" is "Succeeded"
 
-Build database with bad Resources
-* Clean imagery resource "BlueMarble_BadAndGood"
-* Build imagery resource "BlueMarble_BadAndGood"
-* Verify that the state of database "Database_BadAndGood" is "Blocked"
-
 Mark resource good
 * Mark imagery resource "BlueMarble_BadAndGood" good
 * Verify that the state of database "Database_BadAndGood" is "Succeeded"
@@ -453,7 +448,7 @@ Mark database good
 * Verify that the state of imagery project "StatePropagationTest_BadAndGood" is "Succeeded"
 * Verify that the state of images for default project "BadAndGood" is "Succeeded"
 
-## Cancel resource before building database or project
+## Cancel Resource Before Building Database or Project
 Tags: cancel, build 
 
 Set up
@@ -481,7 +476,7 @@ Build the database
 * Verify that the state of imagery resource "BlueMarble_CancelBeforeBuild" is "Succeeded"
 * Verify that the state of imagery project "StatePropagationTest_CancelBeforeBuild" is "Succeeded"
 
-## Build failed project 
+## Build Database with Failed Resources
 Tags: failed, build, rebuild
 * Create imagery project "StatePropagationTest_BadImageryProject1"
 * Add imagery resource "StatePropagationTest_FailedImageryResource" to project "StatePropagationTest_BadImageryProject1"

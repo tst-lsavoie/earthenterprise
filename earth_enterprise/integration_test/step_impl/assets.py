@@ -370,7 +370,7 @@ def create_database_imagery(database, imagery):
 @step("Create map layer <layer> from resource <resource>")
 def create_map_layer_from_resource(layer, resource):
   call(["/opt/google/bin/genewmaplayer", "--legend", layer, "--output", os.path.join(MAP_LAYER_PATH, layer),
-        "--template", "resources/CA_POIs_template.kmdsp", os.path.join(VECTOR_RESOURCE_PATH, resource)],
+       os.path.join(VECTOR_RESOURCE_PATH, resource)],
        "Failed to create map layer %s" % layer)
 
 @step("Create map project <project> from layer <layer>")
