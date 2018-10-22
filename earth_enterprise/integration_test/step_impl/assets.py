@@ -105,6 +105,12 @@ def do_add_imagery_resource_to_project(resource, project, isMercator):
 def add_imagery_resource_to_project(resource, project):
   do_add_imagery_resource_to_project(resource, project, isMercator=False)
 
+@step("Drop imagery resource <resource> from project <project>")
+def drop_imagery_resource_to_project(resource, project):
+  commandLine = ["/opt/google/bin/geadropfromimageryproject", "-o", os.path.join(IMAGERY_PROJECT_PATH, project), resource]
+  call(commandLine, "Failed to drop imagery resource %s from project %s" % (resource, project))
+
+
 @step("Add mercator imagery resource <resource> to project <project>")
 def add_merc_imagery_resource_to_project(resource, project):
   do_add_imagery_resource_to_project(resource, project, isMercator=True)

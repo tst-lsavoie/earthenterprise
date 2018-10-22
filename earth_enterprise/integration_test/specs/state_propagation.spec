@@ -472,12 +472,23 @@ Build the database
 * Verify that the state of imagery resource "BlueMarble_CancelBeforeBuild" is "Succeeded"
 * Verify that the state of imagery project "StatePropagationTest_CancelBeforeBuild" is "Succeeded"
 
-## Build bad project
+## Build failed project 
 * Create imagery project "StatePropagationTest_BadImageryProject1"
-* Create imagery resource "BadImagery_MultiProject" from "Imagery/BadTestImage1.jp2"
-* Add imagery resource "BadImagery_MultiProject" to project "StatePropagationTest_BadImageryProject1"
-* Verify that the state of imagery resource "StatePropagationTest_BadImageryProject1" is "Failed"
-  
+* Add imagery resource "StatePropagationTest_FailedImageryResource" to project "StatePropagationTest_BadImageryProject1"
+* Add imagery resource "BlueMarble_MultiProject" to project "StatePropagationTest_BadImageryProject1"
+* Wait for imagery project "StatePropagationTest_BadImageryProject1" to reach state "Bad"
+
+## Build database with failed resource
+* Create database "StatePropagationTest_Database_FailedResources" from imagery project "StatePropagationTest_BadImageryProject1"
+* Build database "StatePropagationTest_Database_FailedResources"
+* Wait for database "StatePropagationTest_Database_FailedResources" to reach state "Blocked"
+
+## Rebuild failed database without failed resource
+* Drop imagery resource "StatePropagationTest_FailedImageryResource" from project "StatePropagationTest_BadImageryProject1"
+* Build database "StatePropagationTest_Database_FailedResources"
+* Wait for database "Database_FailedResources" to reach state "Succeeded"
+
+
 ## Map Projects and Mercator Assets
 We do not test Map and Mercator assets as thoroughly as flat assets since much
 of the processing is the same.
