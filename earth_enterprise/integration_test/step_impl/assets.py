@@ -107,7 +107,7 @@ def add_imagery_resource_to_project(resource, project):
 
 @step("Drop imagery resource <resource> from project <project>")
 def drop_imagery_resource_to_project(resource, project):
-  commandLine = ["/opt/google/bin/geadropfromimageryproject", "-o", os.path.join(IMAGERY_PROJECT_PATH, project), resource]
+  commandLine = ["/opt/google/bin/gedropfromimageryproject", "-o", os.path.join(IMAGERY_PROJECT_PATH, project), os.path.join(IMAGERY_RESOURCE_PATH, resource)]
   call(commandLine, "Failed to drop imagery resource %s from project %s" % (resource, project))
 
 
